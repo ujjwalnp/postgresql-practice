@@ -11,7 +11,7 @@ const client = new Client({
 });
 
 // Define the date range for the timestamp
-const startDate = new Date('2024-11-27T12:00:00'); // 27th Nov 12 PM
+const startDate = new Date('2024-11-10T12:00:00'); // 27th Nov 12 PM
 const endDate = new Date('2024-11-29T23:59:59'); // 29th Nov
 
 // Helper function to generate a random timestamp between the start and end date in Nepal Time Zone
@@ -46,14 +46,16 @@ const nepaliLastNames = [
 ];
 
 // Realistic Nepali district and address format
-const districts = ['Kathmandu', 'Lalitpur', 'Bhaktapur', 'Pokhara', 'Chitwan', 'Biratnagar', 'Dhangadhi', 'Butwal', 'Hetauda', 'Janakpur', 
-    'Bhojpur', 'Dhankuta', 'Ilam', 'Jhapa', 'Khotang', 'Morang', 'Okhaldhunga', 'Panchthar', 'Sankhuwasabha', 'Solukhumbu', 
-    'Sunsari', 'Taplejung', 'Terhathum', 'Udayapur', 'Ramechhap', 'Sindhuli', 'Sindhupalchok', 'Baglung', 'Gorkha', 'Kaski', 
-    'Lumbini', 'Manang', 'Mustang', 'Myagdi', 'Nawalpur', 'Parbat', 'Syangja', 'Tanahun', 'Kailali', 'Kanchanpur', 'Baitadi', 
-    'Bajhang', 'Bajura', 'Dadeldhura', 'Darchula', 'Doti', 'Achham', 'Baitadi', 'Bajhang', 'Bajura', 'Dadeldhura', 'Darchula', 
-    'Far Western', 'Gulmi', 'Jajarkot', 'Jumla', 'Kalikot', 'Kapilvastu', 'Kavrepalanchok', 'Khotang', 'Makwanpur', 'Morang', 
-    'Rasuwa', 'Sindhupalchok', 'Salyan', 'Sundhuli', 'Surkhet', 'Western Rukum', 'Rupandehi', 'Kailali', 'Kanchanpur', 'Rautahat'];
-    
+const districts = [
+    'Achham', 'Arghakhanchi', 'Baglung', 'Baitadi', 'Bajhang', 'Bajura', 'Banke', 'Bara', 'Bardiya', 'Bhaktapur', 'Bhojpur', 
+    'Chitwan', 'Dadeldhura', 'Dailekh', 'Dang', 'Darchula', 'Dhading', 'Dhankuta', 'Dhanusha', 'Dolakha', 'Dolpa', 'Doti', 
+    'Gorkha', 'Gulmi', 'Humla', 'Ilam', 'Jajarkot', 'Jhapa', 'Jumla', 'Kailali', 'Kalikot', 'Kanchanpur', 'Kapilvastu', 'Kaski', 
+    'Kathmandu', 'Kavrepalanchok', 'Khotang', 'Lalitpur', 'Lamjung', 'Mahottari', 'Makwanpur', 'Manang', 'Morang', 'Mugu', 
+    'Mustang', 'Myagdi', 'Nawalpur', 'Nuwakot', 'Okhaldhunga', 'Palpa', 'Panchthar', 'Parbat', 'Parsa', 'Pyuthan', 'Ramechhap', 
+    'Rasuwa', 'Rautahat', 'Rolpa', 'Rukum East', 'Rukum West', 'Rupandehi', 'Salyan', 'Sankhuwasabha', 'Saptari', 'Sarlahi', 
+    'Sindhuli', 'Sindhupalchok', 'Siraha', 'Solukhumbu', 'Sunsari', 'Surkhet', 'Syangja', 'Tanahun', 'Taplejung', 'Terhathum', 
+    'Udayapur'
+];
 const tolenames = [
     'Bhojpur Bazaar', 'Hile Bazaar', 'Shree Antu', 'Kankai', 'Halesi Tuwachung', 'Mills Area', 'Manakamana', 'Ranigaun',
     'Hedangna', 'Namche Bazaar', 'Barahachhetra', 'Taplejung', 'Myanglung', 'Gaighat', 'Gadhimai', 'Janaki Chowk', 'Jaleshwor',
@@ -131,8 +133,8 @@ const status = [
 async function insertData() {
     await client.connect();
     
-    const batchSize = 100;  // Number of records per batch
-    const totalRecords = 10000;  // Total number of records to insert
+    const batchSize = 1000;  // Number of records per batch
+    const totalRecords = 100000;  // Total number of records to insert
 
     for (let i = 0; i < totalRecords; i += batchSize) {
         const queries = [];
@@ -162,8 +164,8 @@ async function insertData() {
 
             // Construct the SQL query for inserting the data
             const query = `
-                INSERT INTO tblPatient (
-                    DOC_NAME, DOC_CODE, DOC_DEPART, HospitalCode, PAT_Sex, PAT_Address, PAT_Age, CaseType, CaseCode, CaseName, CaseDepart, HOS_NAME, HOS_Address, CaseStatus, Timestamp
+                INSERT INTO tbl_Patient (
+                    DOC_NAME, DOC_CODE, DOC_DEPART, Hospital_Code, PAT_Sex, PAT_Address, PAT_Age, Case_Type, Case_Code, Case_Name, Case_Depart, HOS_NAME, HOS_Address, Case_Status, Timestamp
                 ) VALUES (
                     '${fullName}', ${docCode}, '${docDept}', ${companyCode}, '${sex}', '${address}', ${age}, '${caseType}', ${caseCode}, '${caseName}', '${caseDept}', '${hospitalName}', '${hospitalAddress}', '${caseStatus}', '${timestamp}'
                 );
