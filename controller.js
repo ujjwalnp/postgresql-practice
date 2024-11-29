@@ -1,8 +1,9 @@
 const pool = require('./db')
+const queries = require('./queries')
 
-const getUsers = (req, res) => {
-    console.log('getUsers')
-    pool.query('SELECT * FROM tlbPatient ORDER BY id ASC', (error, results) => {
+const getHospitalData = (req, res) => {
+    console.log('getHospitalData')
+    pool.query(queries.getAllData, (error, results) => {
         if (error) {
             throw error
         }
@@ -11,5 +12,5 @@ const getUsers = (req, res) => {
 }
 
 module.exports = {
-    getUsers
+    getHospitalData
 }

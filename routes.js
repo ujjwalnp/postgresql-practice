@@ -3,6 +3,6 @@ const controller = require('./controller')
 
 const router = Router()
 
-router.get('/users', controller.getUsers)
+router.get('/users', controller.getHospitalData)
 
 module.exports = router

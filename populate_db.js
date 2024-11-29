@@ -10,6 +10,30 @@ const client = new Client({
     port: 5432,
 });
 
+// Define the date range for the timestamp
+const startDate = new Date('2024-11-27T12:00:00'); // 27th Nov 12 PM
+const endDate = new Date('2024-11-29T23:59:59'); // 29th Nov
+
+// Helper function to generate a random timestamp between the start and end date in Nepal Time Zone
+function generateRandomTimestamp() {
+    // Ensure the dates are valid
+    if (startDate instanceof Date && endDate instanceof Date) {
+        // Generate a random date between the start and end date
+        const randomDate = faker.date.between({
+            from: startDate,
+            to: endDate
+        });
+
+        // Convert to Nepal time zone (UTC +5:45)
+        const nepalOffsetMillis = 5 * 60 * 60 * 1000 + 45 * 60 * 1000; // UTC +5:45 in milliseconds
+        const nepalTime = new Date(randomDate.getTime() + nepalOffsetMillis);
+
+        return nepalTime.toISOString(); // Format it as an ISO string
+    } else {
+        throw new Error('Invalid date range');
+    }
+}
+
 // Realistic Nepali first names and last names (common names in Nepal)
 const nepaliFirstNames = [
     'Sanjay', 'Pooja', 'Rajesh', 'Anjali', 'Sita', 'Hari', 'Maya', 'Suman', 'Niraj', 'Rita',
@@ -134,13 +158,14 @@ async function insertData() {
             const hospitalName = faker.helpers.arrayElement(hospitalNames);
             const hospitalAddress = `${hospitalName}, ${district}, Nepal`;
             const caseStatus = faker.helpers.arrayElement(status);
+            const timestamp = generateRandomTimestamp();
 
             // Construct the SQL query for inserting the data
             const query = `
                 INSERT INTO tblPatient (
-                    DOC_NAME, DOC_CODE, DOC_DEPART, HospitalCode, PAT_Sex, PAT_Address, PAT_Age, CaseType, CaseCode, CaseName, CaseDepart, HOS_NAME, HOS_Address, CaseStatus
+                    DOC_NAME, DOC_CODE, DOC_DEPART, HospitalCode, PAT_Sex, PAT_Address, PAT_Age, CaseType, CaseCode, CaseName, CaseDepart, HOS_NAME, HOS_Address, CaseStatus, Timestamp
                 ) VALUES (
-                    '${fullName}', ${docCode}, '${docDept}', ${companyCode}, '${sex}', '${address}', ${age}, '${caseType}', ${caseCode}, '${caseName}', '${caseDept}', '${hospitalName}', '${hospitalAddress}', '${caseStatus}'
+                    '${fullName}', ${docCode}, '${docDept}', ${companyCode}, '${sex}', '${address}', ${age}, '${caseType}', ${caseCode}, '${caseName}', '${caseDept}', '${hospitalName}', '${hospitalAddress}', '${caseStatus}', '${timestamp}'
                 );
             `;
             queries.push(query);
