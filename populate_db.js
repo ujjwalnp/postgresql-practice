@@ -13,43 +13,102 @@ const client = new Client({
 // Realistic Nepali first names and last names (common names in Nepal)
 const nepaliFirstNames = [
     'Sanjay', 'Pooja', 'Rajesh', 'Anjali', 'Sita', 'Hari', 'Maya', 'Suman', 'Niraj', 'Rita',
-    'Bishal', 'Pramila', 'Deepak', 'Kriti', 'Shyam', 'Sanjita', 'Kamal', 'Ramesh', 'Gita', 'Manish'
+    'Bishal', 'Pramila', 'Deepak', 'Kriti', 'Shyam', 'Sanjita', 'Kamal', 'Ramesh', 'Gita', 'Manish',
+    'Sita', 'Gita', 'Sarita', 'Sushil', 'Sujata', 'Santosh', 'Sunita', 'Rajendra', 'Ananyana'
 ];
 
 const nepaliLastNames = [
-    'Shrestha', 'Rai', 'Bhandari', 'Tamang', 'Adhikari', 'Joshi', 'Chaudhary', 'Kunwar', 'Pokhrel', 'Bhattarai',
-    'Khadka', 'Gautam', 'Neupane', 'Thapa', 'Sapkota', 'Lama', 'Magar', 'Karki', 'Bista', 'Subedi'
+    'Shrestha', 'Rai', 'Bhandari', 'Tamang', 'Adhikari', 'Joshi', 'Chaudhary', 'Kunwar', 'Pokhrel', 'Bhattarai', 'Upadhyay', 'Gurung', 'Ghale', 'Pandey', 'Gyawali', 'Gautam', 'Dhakal', 'Khadka', 'Gautam', 'Neupane', 'Thapa', 'Sapkota', 'Lama', 'Magar', 'Karki', 'Bista', 'Subedi', 'Rana'
 ];
 
 // Realistic Nepali district and address format
-const districts = ['Kathmandu', 'Lalitpur', 'Bhaktapur', 'Pokhara', 'Chitwan', 'Biratnagar', 'Dhangadhi', 'Butwal', 'Hetauda', 'Janakpur'];
+const districts = ['Kathmandu', 'Lalitpur', 'Bhaktapur', 'Pokhara', 'Chitwan', 'Biratnagar', 'Dhangadhi', 'Butwal', 'Hetauda', 'Janakpur', 
+    'Bhojpur', 'Dhankuta', 'Ilam', 'Jhapa', 'Khotang', 'Morang', 'Okhaldhunga', 'Panchthar', 'Sankhuwasabha', 'Solukhumbu', 
+    'Sunsari', 'Taplejung', 'Terhathum', 'Udayapur', 'Ramechhap', 'Sindhuli', 'Sindhupalchok', 'Baglung', 'Gorkha', 'Kaski', 
+    'Lumbini', 'Manang', 'Mustang', 'Myagdi', 'Nawalpur', 'Parbat', 'Syangja', 'Tanahun', 'Kailali', 'Kanchanpur', 'Baitadi', 
+    'Bajhang', 'Bajura', 'Dadeldhura', 'Darchula', 'Doti', 'Achham', 'Baitadi', 'Bajhang', 'Bajura', 'Dadeldhura', 'Darchula', 
+    'Far Western', 'Gulmi', 'Jajarkot', 'Jumla', 'Kalikot', 'Kapilvastu', 'Kavrepalanchok', 'Khotang', 'Makwanpur', 'Morang', 
+    'Rasuwa', 'Sindhupalchok', 'Salyan', 'Sundhuli', 'Surkhet', 'Western Rukum', 'Rupandehi', 'Kailali', 'Kanchanpur', 'Rautahat'];
+    
 const tolenames = [
-    'Mahalaxmisthan', 'Banasthali', 'Baluwatar', 'Jhamsikhel', 'Patan', 'Thapathali', 'Bagbazar', 'Boudha', 'Chabahil', 'Swayambhu',
-    'Kalimati', 'Pashupati', 'Tahachal', 'Naya Baneshwor', 'Newroad', 'Baneshwor', 'Putalisadak', 'Lajimpat', 'Bhrikuti Mandap', 'Durbarmarg'
+    'Bhojpur Bazaar', 'Hile Bazaar', 'Shree Antu', 'Kankai', 'Halesi Tuwachung', 'Mills Area', 'Manakamana', 'Ranigaun',
+    'Hedangna', 'Namche Bazaar', 'Barahachhetra', 'Taplejung', 'Myanglung', 'Gaighat', 'Gadhimai', 'Janaki Chowk', 'Jaleshwor',
+    'Adarsh Nagar', 'Garuda', 'Malangawa', 'Siraha', 'Durbar Square', 'Dhunche', 'Dolakha Bazaar', 'Swayambhu', 'Namobuddha', 
+    'Chitlang', 'Nuwakot Durbar', 'Manthali', 'Dhunche', 'Kamalamai', 'Tatopani', 'Baglung', 'Gorkha Bazaar', 'Lakeside', 'Besisahar',
+    'Tatopani', 'Devchuli', 'Kushma', 'Syangja', 'Bandipur', 'Sandhikharka', 'Nepalgunj', 'Thakurbaba', 'Ghorahi', 'Resunga', 'Tilaurakot', 
+    'Tansen', 'Swargadwari', 'Rolpa', 'Lumbini', 'Dullu', 'Shey Phoksundo', 'Simikot', 'Jajarkot', 'Kalikot', 
+    'Sitalpati', 'Birendranagar', 'Chaurjahari', 'Ramaroshan', 'Dasharathchanda', 'Khaptad', 'Budinanda', 'Amargadhi', 'Api Nampa',
+    'Dipayal', 'Silgadhi', 'Tikapur', 'Shuklaphanta', 'Balkumari', 'Gaur', 'Jaleshwor', 'Janakpur', 'Dhanusha', 'Birgunj', 'Kalaiya',
+    'Barahathawa', 'Hetauda Bazar', 'Bharatpur', 'Tandi', 'Ratnanagar', 'Sauraha', 'Lamahi', 'Ghorahi', 'Tulsipur', 'Bhalubang', 'Ghorahi',
+    'Orali', 'Thakuradwara', 'Dhangadhi', 'Mahendranagar', 'Bhimdatta', 'Dadeldhura', 'Dipayal', 'Doti', 'Dhangadhi', 'Kailali', 'Dhangadhi',
+    'Bikashnagar', 'Fultekra', 'Dhamboji', 'Butwal', 'Tilottama', 'Siddharthanagar', 'Bhairahawa', 'Taulihawa', 'Kapilvastu', 'Taulihawa',
+    'Bastipur', 'School Road', 'Congress Chowk', 'Janaki Chowk', 'Chauki Tol', 'Jhilimili Tol', 'Hetauda Industrial Area', 'Shivaghat', 'Fulbari',
+    'Traffic Chowk', 'MMC Road', 'Bhrikuti Chowk', 'Nagarpalika Road', 'Bhutandevi Mandir', 'Bhimad', 'Bhrikutimandap', 'Kamaladi', 'Kantipath'
 ];
 
+
 // Realistic Case Types found in Nepali hospitals
-const caseTypes = ['General Surgery', 'Maternity', 'Orthopedics', 'Cardiology', 'Emergency', 'Pediatrics', 'Gynecology', 'ENT', 'Nephrology'];
+const caseTypes = [
+    'General Surgery', 'Maternity', 'Orthopedics', 'Cardiology', 'Emergency', 'Pediatrics', 'Gynecology', 'ENT', 'Nephrology',
+    'Dermatology', 'Urology', 'Neurology', 'Oncology', 'Psychiatry', 'Pulmonology', 'Gastroenterology', 'Rheumatology', 'Hematology',
+    'Endocrinology', 'Ophthalmology', 'Dentistry', 'Plastic Surgery', 'Anesthesiology', 'Radiology', 'Pathology', 'Hepatology', 
+    'Immunology', 'Infectious Diseases', 'Chiropractic', 'Nutrition', 'Sports Medicine', 'Palliative Care', 'Rehabilitation', 
+    'Emergency Medicine', 'Family Medicine', 'Geriatrics', 'Sleep Medicine', 'Pain Management', 'Addiction Medicine', 'Vascular Surgery', 
+    'Traumatology', 'Obstetrics', 'Neonatology', 'Bariatric Surgery', 'Audiology', 'Toxicology', 'Forensic Medicine', 'Plastic Surgery', 
+    'Molecular Medicine', 'Geriatric Psychiatry', 'Fertility Medicine'
+];
+
 
 // Realistic Medical Case Names for common diseases
 const medicalCases = [
     'Pneumonia', 'Appendicitis', 'Heart Failure', 'Osteoarthritis', 'Chronic Bronchitis', 'Stroke', 'Diabetes Type 2',
     'Hypertension', 'Malaria', 'Tuberculosis', 'Acute Myocardial Infarction (Heart Attack)', 'Asthma', 'Liver Cirrhosis',
-    'Parkinson’s Disease', 'Chronic Kidney Disease', 'Cervical Cancer', 'Gastric Ulcer', 'Anemia', 'Hepatitis', 'Epilepsy'
+    'Parkinson’s Disease', 'Chronic Kidney Disease', 'Cervical Cancer', 'Gastric Ulcer', 'Anemia', 'Hepatitis', 'Epilepsy',
+    'Urinary Tract Infection (UTI)', 'Gallstones', 'Hypothyroidism', 'Hyperthyroidism', 'Cystic Fibrosis', 'Chronic Fatigue Syndrome',
+    'Alzheimer’s Disease', 'Acid Reflux (GERD)', 'Chronic Sinusitis', 'Psoriasis', 'Multiple Sclerosis', 'Sleep Apnea', 'Atrial Fibrillation',
+    'Sickle Cell Anemia', 'Rheumatoid Arthritis', 'Lung Cancer', 'Breast Cancer', 'Prostate Cancer', 'Leukemia', 'Gout', 'Cholesterol Imbalance',
+    'Schizophrenia', 'Depression', 'Bipolar Disorder', 'Anxiety Disorder', 'Obesity', 'Osteoporosis', 'Kidney Stones', 'Pelvic Inflammatory Disease',
+    'Tonsillitis', 'Endometriosis', 'Menstrual Disorders', 'Incontinence', 'HIV/AIDS', 'Hepatitis B', 'Hepatitis C', 'Meningitis', 'Tubal Ligation',
+    'Dengue Fever', 'Chikungunya', 'Zika Virus', 'Leptospirosis', 'Yellow Fever', 'Viral Hemorrhagic Fever', 'West Nile Virus', 'Scrub Typhus'
 ];
+
 
 // Realistic Nepali Hospital Names
 const hospitalNames = [
-    'Shree Harsha Hospital', 'Kantipur Hospital', 'Grande International Hospital',
-    'Patan Hospital', 'Om Hospital', 'B&B Hospital',
-    'Hams Hospital', 'Star Hospital'
+    'Shree Harsha Hospital', 'Kantipur Hospital', 'Grande International Hospital', 
+    'Patan Hospital', 'Om Hospital', 'B&B Hospital', 
+    'Hams Hospital', 'Star Hospital', 'Shree Harsha Hospital', 'National Hospital', 
+    'Tribhuvan University Teaching Hospital', 'Siddhartha Hospital', 'Maternity Hospital', 
+    'Shree Harsha Hospital', 'Kanti Childrens Hospital', 'Nepal Cancer Hospital', 
+    'Sanjivani Hospital', 'Care Hospital', 'Apex Hospital', 
+    'Shree Harsha Hospital', 'Bhaktapur Cancer Hospital', 'Shree Harsha Hospital', 
+    'Shree Harsha Hospital', 'Star Hospital', 'Kathmandu Medical College Teaching Hospital', 
+    'Medical College Teaching Hospital', 'Nepal Medical College', 'Manmohan Memorial Medical College', 
+    'Chhetrapati Hospital', 'Narayani Hospital', 'Zikri Hospital', 
+    'Medical Care Centre', 'St. Xavier Hospital', 'Sashwat Hospital', 'Heatauda Teaching Hospital', 'Bir Hospital', 'Biratnagar Hospital', 'Grande Hospital'
 ];
+
+const departments = [
+    'Medicine', 'Surgery', 'Orthopedics', 'Pediatrics', 'Dermatology', 
+    'Cardiology', 'Neurology', 'Gynecology', 'Psychiatry', 'Endocrinology', 
+    'Urology', 'Ophthalmology', 'Dentistry', 'Gastroenterology', 'Pulmonology', 
+    'Nephrology', 'Hematology', 'Rheumatology', 'Infectious Diseases', 'Palliative Care', 
+    'Radiology', 'Anesthesiology', 'Pathology', 'Rehabilitation', 'Sports Medicine', 
+    'Family Medicine', 'Emergency Medicine', 'Geriatrics', 'Plastic Surgery', 'Vascular Surgery', 
+    'Bariatric Surgery', 'Chiropractic', 'Nutrition', 'Toxicology', 'Forensic Medicine', 
+    'Addiction Medicine', 'Immunology', 'Molecular Medicine', 'Fertility Medicine', 'Sleep Medicine', 
+    'Traumatology', 'Oncology', 'Reproductive Medicine', 'Audiology', 'Occupational Medicine'
+];
+
+const status = [
+    'Admitted', 'Discharged', 'Pending', 'Cancelled', 'Completed', 'In Progress', 'Scheduled', 'Rescheduled', 'Postponed', 'No Show'
+]
 
 async function insertData() {
     await client.connect();
     
     const batchSize = 100;  // Number of records per batch
-    const totalRecords = 1000;  // Total number of records to insert
+    const totalRecords = 10000;  // Total number of records to insert
 
     for (let i = 0; i < totalRecords; i += batchSize) {
         const queries = [];
@@ -60,7 +119,7 @@ async function insertData() {
             const lastName = faker.helpers.arrayElement(nepaliLastNames);
             const fullName = `${firstName} ${lastName}`;
             const docCode = faker.number.int({ min: 100, max: 999 });
-            const docDept = faker.helpers.arrayElement(['Medicine', 'Surgery', 'Orthopedics', 'Pediatrics', 'Dermatology']);
+            const docDept = faker.helpers.arrayElement(departments);
             const companyCode = faker.number.int({ min: 10000, max: 99999 });
             const sex = faker.helpers.arrayElement(['Male', 'Female']);
             const district = faker.helpers.arrayElement(districts);
@@ -71,16 +130,17 @@ async function insertData() {
             const caseType = faker.helpers.arrayElement(caseTypes);
             const caseCode = faker.number.int({ min: 1000, max: 9999 });
             const caseName = faker.helpers.arrayElement(medicalCases);
-            const caseDept = faker.helpers.arrayElement(['Orthopedics', 'Pediatrics', 'Surgery', 'Gynecology']);
+            const caseDept = faker.helpers.arrayElement(departments);
             const hospitalName = faker.helpers.arrayElement(hospitalNames);
             const hospitalAddress = `${hospitalName}, ${district}, Nepal`;
+            const caseStatus = faker.helpers.arrayElement(status);
 
             // Construct the SQL query for inserting the data
             const query = `
-                INSERT INTO tlbPatient (
-                    DOC_NAME, DOC_CODE, DOC_DEPART, HospitalCode, PAT_Sex, PAT_Address, PAT_Age, CaseType, CaseCode, CaseName, CaseDepart, HOS_NAME, HOS_Address
+                INSERT INTO tblPatient (
+                    DOC_NAME, DOC_CODE, DOC_DEPART, HospitalCode, PAT_Sex, PAT_Address, PAT_Age, CaseType, CaseCode, CaseName, CaseDepart, HOS_NAME, HOS_Address, CaseStatus
                 ) VALUES (
-                    '${fullName}', ${docCode}, '${docDept}', ${companyCode}, '${sex}', '${address}', ${age}, '${caseType}', ${caseCode}, '${caseName}', '${caseDept}', '${hospitalName}', '${hospitalAddress}'
+                    '${fullName}', ${docCode}, '${docDept}', ${companyCode}, '${sex}', '${address}', ${age}, '${caseType}', ${caseCode}, '${caseName}', '${caseDept}', '${hospitalName}', '${hospitalAddress}', '${caseStatus}'
                 );
             `;
             queries.push(query);
