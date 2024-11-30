@@ -11,8 +11,8 @@ const client = new Client({
 });
 
 // Define the date range for the timestamp
-const startDate = new Date('2024-11-10T12:00:00'); // 27th Nov 12 PM
-const endDate = new Date('2024-11-29T23:59:59'); // 29th Nov
+const startDate = new Date('2024-10-19T12:00:00');
+const endDate = new Date('2024-11-29T23:59:59');
 
 // Helper function to generate a random timestamp between the start and end date in Nepal Time Zone
 function generateRandomTimestamp() {
